@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+actor Admin as a
+actor "Adhérent" as m
+
+package "Gestion des Terrains (Admin)" {
+  usecase "Ajouter Terrain" as UC_AddT
+  usecase "Modifier Terrain" as UC_ModT
+  usecase "Supprimer Terrain" as UC_DelT
+  usecase "Lister Terrains" as UC_ListT
+}
+
+package "Gestion des Réservations" {
+  usecase "Réserver Créneau" as UC_Book
+  usecase "Annuler Réservation" as UC_Cancel
+  usecase "Valider/Refuser Réservation" as UC_Validate
+}
+
+a --> UC_AddT
+a --> UC_ModT
+a --> UC_DelT
+a --> UC_ListT
+a --> UC_Validate
+
+m --> UC_ListT : "Consulter dispo"
+m --> UC_Book
+m --> UC_Cancel
+
+UC_Book ..> UC_ListT : <<include>>
+UC_Validate ..> UC_ListT : <<include>>
+@enduml

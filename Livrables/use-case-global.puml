@@ -1,0 +1,27 @@
+@startuml
+left to right direction
+actor Admin as a
+actor "Adhérent" as m
+
+package "Système de Réservation de Padel" {
+  usecase "S'authentifier" as UC1
+  usecase "Gérer les terrains (CRUD)" as UC2
+  usecase "Gérer les créneaux" as UC3
+  usecase "Gérer les réservations" as UC4
+  usecase "S'inscrire" as UC5
+  usecase "Consulter les terrains" as UC6
+  usecase "Réserver un terrain" as UC7
+  usecase "Consulter l'historique" as UC8
+}
+
+a --> UC1
+a --> UC2
+a --> UC3
+a --> UC4
+
+m --> UC1
+m --> UC5
+m --> UC6
+m --> UC7
+m --> UC8
+@enduml

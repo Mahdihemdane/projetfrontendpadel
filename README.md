@@ -1,4 +1,4 @@
-# Padel Court Reservation System
+# Padel Court Reservation System - Developed by Mahdi Hemdane
 
 Full-stack application for managing Padel court reservations.
 

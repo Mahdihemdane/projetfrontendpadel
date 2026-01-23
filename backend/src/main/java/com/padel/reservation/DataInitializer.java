@@ -36,8 +36,8 @@ public class DataInitializer implements CommandLineRunner {
 
             // Member
             User member = new User();
-            member.setFirstName("John");
-            member.setLastName("Doe");
+            member.setFirstName("Mahdi");
+            member.setLastName("Hemdane");
             member.setEmail("user@test.com");
             member.setPassword(encoder.encode("123456"));
             member.setRole(Role.MEMBER);
