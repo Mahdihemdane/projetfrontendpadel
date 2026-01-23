@@ -1,0 +1,43 @@
+# Global gitignore for Padel Project
+
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+.mvn/
+.metadata/
+bin/
+*.tmp
+*.bak
+*.swp
+*~
+.settings/
+.project
+.classpath
+.factorypath
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+.npm
+.eslintcache
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*.DS_Store
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
