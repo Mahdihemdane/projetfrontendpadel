@@ -1,4 +1,4 @@
-# Padel Reservation System - Walkthrough
+# Padel Reservation System - Developed by Mahdi Hemdane
 
 This document guides you through setting up, running, and using the Padel Court Reservation system.
 

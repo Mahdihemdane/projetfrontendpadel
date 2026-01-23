@@ -171,7 +171,22 @@ Nous avons intégré le thème **Argon Dashboard** qui repose sur Bootstrap 4. C
 
 ---
 
-## 8. CONCLUSION ET PERSPECTIVES
+## 8. DÉFIS TECHNIQUES ET SOLUTIONS
+
+Durant le développement, plusieurs défis ont été relevés pour garantir la qualité du produit final :
+
+### 8.1 Résolution des Erreurs de Proxy (404 Not Found)
+L'un des défis majeurs était la communication entre le port 4200 (Angular) et 8080 (Spring Boot). Nous avons implémenté une configuration de proxy (`proxy.conf.json`) pour rediriger tous les appels `/api` vers le backend, évitant ainsi les erreurs CORS et les problèmes de routage.
+
+### 8.2 Optimisation du Bundle CSS
+Au départ, des avertissements "Unable to locate stylesheet" apparaissaient. Nous avons intégré les bibliothèques d'icônes (Nucleo et FontAwesome) directement dans le tableau `styles` du fichier `angular.json`, garantissant qu'elles sont compilées et servies correctement par le serveur Angular.
+
+### 8.3 Dynamisation du Profil Utilisateur
+Le passage d'une interface statique à un profil dynamique a nécessité une modification de la chaîne complète : de l'entité Java `User` jusqu'au composant Angular `UserProfile`. Le token JWT a été étendu pour inclure le prénom et le nom, permettant un affichage personnalisé dès la connexion.
+
+---
+
+## 9. CONCLUSION ET PERSPECTIVES
 
 ### Bilan Technique
 L'objectif de créer une application complète, sécurisée et fonctionnelle est atteint. L'utilisation de Spring Boot et Angular a permis de maintenir une base de code propre et maintenable.
