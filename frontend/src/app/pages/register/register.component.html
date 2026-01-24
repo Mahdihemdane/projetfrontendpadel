@@ -64,17 +64,8 @@
                 Email valide est requis
               </div>
             </div>
-            <div class="form-group">
-              <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                </div>
-                <input class="form-control" placeholder="Mot de passe" type="password" name="password"
-                  [(ngModel)]="form.password" required minlength="6" #password="ngModel">
-              </div>
-              <div class="alert alert-danger" *ngIf="password.errors && f.submitted">
-                Mot de passe est requis (min 6 caractères)
-              </div>
+            <div class="alert alert-info">
+              Un mot de passe sera généré automatiquement et envoyé à votre adresse email.
             </div>
 
             <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
