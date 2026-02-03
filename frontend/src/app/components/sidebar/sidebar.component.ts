@@ -9,15 +9,14 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Dashboard', icon: 'ni-tv-2 text-primary', class: '' },
-  // { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
-  // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
-  // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
-  // { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
-  { path: '/terrains', title: 'Terrains (Admin)', icon: 'ni-building text-red', class: '' },
-  { path: '/reservations', title: 'Réservations', icon: 'ni-calendar-grid-58 text-info', class: '' },
+  { path: '/terrains', title: 'Gestion Terrains', icon: 'ni-building text-red', class: 'admin-only' },
+  { path: '/reservations', title: 'Gestion Réservations', icon: 'ni-bullet-list-67 text-info', class: 'admin-only' },
+  { path: '/reservations', title: 'Mes Réservations', icon: 'ni-calendar-grid-58 text-info', class: 'member-only' },
   { path: '/login', title: 'Login', icon: 'ni-key-25 text-info', class: '' },
   { path: '/register', title: 'Register', icon: 'ni-circle-08 text-pink', class: '' }
 ];
+
+import { StorageService } from '../../_services/storage.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -29,12 +28,39 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private storageService: StorageService) { }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    const user = this.storageService.getUser();
+    const roles = (user && user.roles) ? user.roles : [];
+    const isAdmin = roles.includes('ADMIN');
+
+    this.menuItems = ROUTES.filter(menuItem => {
+      // Hide Login and Register from sidebar if logged in
+      if (user && user.roles && (menuItem.path === '/login' || menuItem.path === '/register')) {
+        return false;
+      }
+
+      // Admin only routes
+      if (menuItem.class === 'admin-only') {
+        return isAdmin;
+      }
+
+      // Member only routes
+      if (menuItem.class === 'member-only') {
+        return !isAdmin; // Members see this, Admins don't
+      }
+
+      return true;
+    });
+
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
     });
+  }
+
+  logout() {
+    this.storageService.signOut();
+    this.router.navigate(['/login']);
   }
 }

@@ -56,6 +56,7 @@ export class ReservationsComponent implements OnInit {
                 },
                 err => {
                     console.error(err);
+                    alert("Erreur lors de la mise à jour : " + (err.error?.message || "Erreur inconnue"));
                 }
             );
         }

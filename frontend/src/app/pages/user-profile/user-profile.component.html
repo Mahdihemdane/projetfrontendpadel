@@ -5,11 +5,14 @@
   <!-- Header container -->
   <div class="container-fluid d-flex align-items-center">
     <div class="row">
-      <div class="col-lg-7 col-md-10">
+      <div class="col-lg-7 col-md-10" *ngIf="user">
         <h1 class="display-2 text-white">Hello {{user.firstName}}</h1>
-        <p class="text-white mt-0 mb-5">This is your profile page. You can manage your account information and view your
-          role-specific settings here.</p>
-        <a href="#!" class="btn btn-info disabled">Edit profile (Coming soon)</a>
+        <p class="text-white mt-0 mb-5">C'est votre page de profil. Vous pouvez gérer vos informations personnelles ici.
+        </p>
+        <button (click)="toggleEdit()" class="btn btn-info" *ngIf="!isEditMode">Modifier le profil</button>
+        <button (click)="updateProfile()" class="btn btn-success" *ngIf="isEditMode">Enregistrer les
+          modifications</button>
+        <button (click)="toggleEdit()" class="btn btn-secondary" *ngIf="isEditMode">Annuler</button>
       </div>
     </div>
   </div>
@@ -17,7 +20,7 @@
 <div class="container-fluid mt--7">
   <div class="row">
     <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-      <div class="card card-profile shadow">
+      <div class="card card-profile shadow" *ngIf="user">
         <div class="row justify-content-center">
           <div class="col-lg-3 order-lg-2">
             <div class="card-profile-image">
@@ -66,7 +69,7 @@
       </div>
     </div>
     <div class="col-xl-8 order-xl-1">
-      <div class="card bg-secondary shadow">
+      <div class="card bg-secondary shadow" *ngIf="user">
         <div class="card-header bg-white border-0">
           <div class="row align-items-center">
             <div class="col-8">
@@ -100,16 +103,16 @@
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-first-name">First name</label>
+                    <label class="form-control-label" for="input-first-name">Prénom</label>
                     <input type="text" id="input-first-name" class="form-control form-control-alternative"
-                      [value]="user.firstName" readonly>
+                      [(ngModel)]="user.firstName" name="firstName" [readonly]="!isEditMode">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-last-name">Last name</label>
+                    <label class="form-control-label" for="input-last-name">Nom</label>
                     <input type="text" id="input-last-name" class="form-control form-control-alternative"
-                      [value]="user.lastName" readonly>
+                      [(ngModel)]="user.lastName" name="lastName" [readonly]="!isEditMode">
                   </div>
                 </div>
               </div>

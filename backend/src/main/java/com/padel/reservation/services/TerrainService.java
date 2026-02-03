@@ -39,6 +39,24 @@ public class TerrainService {
         return slotRepository.save(slot);
     }
 
+    public Optional<Slot> getSlotById(Long id) {
+        return slotRepository.findById(id);
+    }
+
+    public Slot updateSlot(Long id, Slot slotDetails) {
+        return slotRepository.findById(id)
+                .map(slot -> {
+                    slot.setDate(slotDetails.getDate());
+                    slot.setStartTime(slotDetails.getStartTime());
+                    slot.setEndTime(slotDetails.getEndTime());
+                    if (slotDetails.getTerrain() != null) {
+                        slot.setTerrain(slotDetails.getTerrain());
+                    }
+                    return slotRepository.save(slot);
+                })
+                .orElseThrow(() -> new RuntimeException("Slot not found with id: " + id));
+    }
+
     public List<Slot> getSlotsByTerrain(Long terrainId) {
         return slotRepository.findByTerrainId(terrainId);
     }

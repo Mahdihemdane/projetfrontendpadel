@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const API_URL = '/api/';
+const API_URL = 'http://localhost:8081/api/';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +18,7 @@ export class ReservationService {
         return this.http.get(API_URL + 'admin/bookings');
     }
 
-    createReservation(slotId: number): Observable<any> {
+    createBooking(slotId: number): Observable<any> {
         return this.http.post(API_URL + 'bookings', { slotId });
     }
 

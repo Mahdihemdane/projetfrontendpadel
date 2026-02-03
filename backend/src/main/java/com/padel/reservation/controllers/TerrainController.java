@@ -74,6 +74,18 @@ public class TerrainController {
         return terrainService.saveSlot(slot);
     }
 
+    // Admin: Update Slot
+    @PutMapping("/admin/slots/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<Slot> updateSlot(@PathVariable Long id, @RequestBody Slot slotDetails) {
+        try {
+            Slot updatedSlot = terrainService.updateSlot(id, slotDetails);
+            return ResponseEntity.ok(updatedSlot);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     // Admin: Delete Slot
     @DeleteMapping("/admin/slots/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")

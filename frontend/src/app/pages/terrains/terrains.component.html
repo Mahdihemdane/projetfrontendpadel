@@ -4,6 +4,78 @@
             <!-- Card stats -->
         </div>
     </div>
+
+    <!-- Slot Manager (Modal-like card) -->
+    <div class="row mt-5" *ngIf="showSlotManager">
+        <div class="col-xl-12">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Gérer les Créneaux pour : {{ selectedTerrain.name }}</h3>
+                        </div>
+                        <div class="col text-right">
+                            <button class="btn btn-sm btn-secondary" (click)="closeSlotManager()">Fermer</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>{{ isSlotEditMode ? 'Modifier le Créneau' : 'Ajouter un Créneau' }}</h4>
+                            <form (ngSubmit)="onSlotSubmit()">
+                                <div class="form-group">
+                                    <label class="form-control-label">Date</label>
+                                    <input type="date" class="form-control" [(ngModel)]="slotForm.date" name="date"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Heure Début</label>
+                                    <input type="time" class="form-control" [(ngModel)]="slotForm.startTime"
+                                        name="startTime" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Heure Fin</label>
+                                    <input type="time" class="form-control" [(ngModel)]="slotForm.endTime"
+                                        name="endTime" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">{{ isSlotEditMode ? 'Mettre à jour' :
+                                    'Ajouter le créneau' }}</button>
+                                <button type="button" class="btn btn-secondary" (click)="resetSlotForm()"
+                                    *ngIf="isSlotEditMode">Annuler</button>
+                            </form>
+                        </div>
+                        <div class="col-md-8">
+                            <h4>Créneaux Existants</h4>
+                            <div class="table-responsive">
+                                <table class="table align-items-center table-flush">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Heure</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let s of terrainSlots">
+                                            <td>{{ s.date }}</td>
+                                            <td>{{ s.startTime }} - {{ s.endTime }}</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-info"
+                                                    (click)="editSlot(s)">Modifier</button>
+                                                <button class="btn btn-sm btn-danger"
+                                                    (click)="deleteSlot(s.id)">Supprimer</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Page content -->
 <div class="container-fluid mt--7">
@@ -39,6 +111,7 @@
                                     </span>
                                 </td>
                                 <td>
+                                    <button class="btn btn-sm btn-info" (click)="manageSlots(t)">Créneaux</button>
                                     <button class="btn btn-sm btn-primary" (click)="editTerrain(t)">Modifier</button>
                                     <button class="btn btn-sm btn-danger"
                                         (click)="deleteTerrain(t.id)">Supprimer</button>

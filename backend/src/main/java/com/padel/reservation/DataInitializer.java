@@ -17,10 +17,10 @@ public class DataInitializer implements CommandLineRunner {
     UserRepository userRepository;
 
     @Autowired
-    TerrainRepository terrainRepository;
+    PasswordEncoder encoder;
 
     @Autowired
-    PasswordEncoder encoder;
+    TerrainRepository terrainRepository;
 
     @Override
     public void run(String... args) throws Exception {

@@ -14,5 +14,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'tables', component: TablesComponent },
     { path: 'icons', component: IconsComponent },
     { path: 'maps', component: MapsComponent },
-    { path: 'terrains', component: TerrainsComponent }
+    { path: 'terrains', component: TerrainsComponent },
+    { path: 'reservations', component: ReservationsComponent }
 ];
